@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#103e43">
+<title>Chetan &amp; Ishyankita — Special Dates</title>
+<style>
+:root{--teal:#103e43;--cream:#f5ecd8;--gold:#c7a66a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:none;background:#061f25}
+body{margin:0;background:#061f25;color:var(--cream);font-family:Georgia,'Times New Roman',serif}
+section{height:100svh;min-height:520px;scroll-snap-align:none;position:relative;overflow:hidden}
+.intro{display:grid;place-items:center;text-align:center;padding:1.5rem;background:radial-gradient(ellipse at center,#1c5557,#082d33 72%)}
+.intro:before,.intro:after{content:"✦  ✧  ✦  ✧  ✦";position:absolute;color:var(--gold);letter-spacing:.8rem;opacity:.65;font-size:1rem;left:0;right:0;text-align:center}
+.intro:before{top:9%}.intro:after{bottom:9%}
+.intro h1{position:relative;z-index:1;font-weight:400;font-style:italic;font-size:clamp(2.7rem,8vw,6rem);line-height:1.08;margin:0;color:#f8eed9}
+.scratch-page{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;padding:1.5rem;background:radial-gradient(ellipse at center,#1c5557,#082d33 75%);text-align:center}
+.ticket{position:relative;width:min(76vw,330px);height:190px;border:2px solid var(--gold);border-radius:12px;overflow:hidden;box-shadow:0 14px 40px #0007;background:#f5ecd8}
+.ticket img{width:100%;height:100%;object-fit:cover;object-position:center 47%;display:block}
+.ticket canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.ticket-hint{position:absolute;bottom:8px;left:0;right:0;pointer-events:none;color:#fff8e8;text-shadow:0 1px 4px #000;font:11px Georgia,serif;letter-spacing:.13em;text-transform:uppercase}
+.date{font-size:clamp(1.7rem,5vw,2.7rem);font-style:italic;color:#f8eed9;margin:0}
+
+
+.invitation-page{background:#082d33;display:grid;place-items:center}
+.invitation-art{position:relative;width:100%;height:100%;display:grid;place-items:center;overflow:hidden}
+.invitation-art img{display:block;width:100%;height:100%;object-fit:contain}
+.coded-ticket{position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);width:min(58%,390px);height:clamp(76px,10.5vh,125px);border:3px double #d6b56f;border-radius:9px;background:linear-gradient(135deg,#123f43,#0b3036);box-shadow:0 4px 12px #533d1c55;display:flex;align-items:center;justify-content:center;overflow:hidden;z-index:2}
+.coded-ticket:before{content:"";position:absolute;inset:5px;border:1px solid #b99655;border-radius:5px;pointer-events:none}
+.ticket-flower{position:absolute;top:50%;transform:translateY(-50%);font-size:clamp(18px,3vh,30px);color:#d6b56f;z-index:1}
+.ticket-flower.left{left:10px}.ticket-flower.right{right:10px}
+.date-underlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#f7e8c2;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;font-size:clamp(17px,3.3vh,31px);white-space:nowrap;pointer-events:none;z-index:1}
+#scratchCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;z-index:3}
+
+
+
+
+section,.first-combined-slide,.invitation-page,.video-slide,.image-slide,.map-page{position:relative}
+.first-combined-slide 
+.opening-video-overlay{z-index:15!important}
+#openingVideoSlide #tapOpen{z-index:10002!important}
+
+.petal-layer{z-index:8}
+.opening-video-screen .tap-open{z-index:20}
+
+.first-combined-slide{position:relative;background:#fbf8ed;display:grid;place-items:center}
+.first-combined-slide>img{width:100%;height:100%;object-fit:contain;display:block}
+.opening-video-overlay{position:absolute;inset:0;z-index:15;background:#000;display:grid;place-items:center;overflow:hidden}
+.opening-video-overlay video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.opening-video-overlay .tap-open{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);z-index:20;border:1.5px solid rgba(255,255,255,.92);border-radius:999px;background:rgba(48,43,34,.72);color:#fff;padding:1.1rem 2.6rem;font:700 1rem Arial,sans-serif;letter-spacing:.18em;white-space:nowrap;cursor:pointer}
+.opening-video-overlay .video-start-note{display:none}
+.opening-video-overlay.video-finished{opacity:0;pointer-events:none;transition:opacity .65s ease}
+
+.image-slide{background:#fbf8ed;display:grid;place-items:center}
+.image-slide>img{width:100%;height:100%;object-fit:contain;display:block}
+
+.video-slide{background:#061f25;display:grid;place-items:center}
+.video-slide video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#061f25}
+
+
+50%{transform:translateX(-50%) scale(1.045)}}
+#openingVideoSlide video{object-fit:contain}
+.video-start-note{position:absolute;z-index:2;bottom:7%;left:0;right:0;text-align:center;color:#f7e8c2;font-style:italic;font-size:1rem;text-shadow:0 2px 5px #000;pointer-events:none}
+
+body.waiting-to-open{height:100svh;overflow:hidden;overscroll-behavior:none}
+
+
+.cover-slide{background:#fbf8ed;display:grid;place-items:center}
+.cover-slide>img{width:100%;height:100%;object-fit:contain;display:block}
+.tap-open{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);z-index:12;border:1px solid #b89452;border-radius:999px;background:rgba(16,62,67,.94);color:#fff2d7;padding:.9rem 1.8rem;font:600 1rem Georgia,serif;letter-spacing:.08em;box-shadow:0 8px 24px #0003;cursor:pointer;animation:tapPulse 1.8s ease-in-out infinite}
+.tap-open span{margin-left:.4rem;color:#e5c17e}
+@keyframes tapPulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.045)}}
+
+
+
+html,body{margin:0;width:100%;min-height:100%;background:#000}
+body.waiting-to-open{height:100svh;overflow:hidden;overscroll-behavior:none}
+body.waiting-to-open #openingVideoSlide{height:100svh;min-height:100svh}
+.opening-video-screen{position:relative;background:#000;display:grid;place-items:center}
+.opening-video-screen video{width:100%;height:100%;object-fit:contain;background:#000}
+.opening-video-screen .tap-open{position:absolute;left:50%;bottom:8%;top:auto;transform:translateX(-50%);z-index:20;border:1.5px solid rgba(255,255,255,.92);border-radius:999px;background:rgba(90,82,62,.42);color:#fff;padding:1.1rem 2.6rem;font:700 1rem Arial,sans-serif;letter-spacing:.18em;white-space:nowrap;box-shadow:none;cursor:pointer;animation:none}
+.opening-video-screen .video-start-note{display:none}
+body.waiting-to-open .petal-layer{display:none}
+
+
+.image-slide{background:#fbf8ed;display:grid;place-items:center}
+.image-slide img{width:100%;height:100%;object-fit:contain;display:block}
+.petal-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:8}
+.video-slide video{z-index:0}
+.invitation-art,.image-slide img,.map-page>*{position:relative}
+
+.map-page{position:relative;background:#f5ecd8;color:#123f43;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;text-align:center;gap:1rem}
+.map-page h2{position:relative;z-index:10;font-size:clamp(2rem,6vw,3.7rem);font-weight:400;font-style:italic;margin:0}
+.map-frame{position:relative;z-index:10;width:min(100%,900px);height:55vh;min-height:240px;border:2px solid var(--gold);border-radius:8px;overflow:hidden}
+.map-frame iframe{width:100%;height:100%;border:0}
+.map-link{position:relative;z-index:10;color:#123f43;text-decoration:underline}
+@media(max-height:650px){.ticket{height:160px;width:min(76vw,290px)}.scratch-page{gap:1rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+html,body{margin:0;padding:0;width:100%;background:#000}
+body.waiting-to-open{height:100svh;max-height:100svh;overflow:hidden;overscroll-behavior:none;position:relative}
+.first-combined-slide{height:100svh;min-height:100svh;max-height:100svh;width:100%;overflow:hidden;box-sizing:border-box;flex:none}
+.opening-video-overlay{position:fixed!important;inset:0!important;width:100vw;height:100svh;min-height:100svh;max-height:100svh;z-index:9999!important;background:#000;overflow:hidden;box-sizing:border-box}
+.opening-video-overlay video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+body.waiting-to-open .first-combined-slide{height:100svh;min-height:100svh;max-height:100svh;overflow:hidden}
+
+
+/* Opening-video prompt: always visible above the video until the user taps */
+#openingVideoSlide{position:fixed!important;inset:0!important;width:100vw!important;height:100svh!important;min-height:100svh!important;max-height:100svh!important;z-index:9999!important;background:#000!important;display:grid;place-items:center;overflow:hidden}
+#openingVideoSlide video{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;z-index:1!important}
+#openingVideoSlide #tapOpen{display:block;visibility:visible;opacity:1;position:absolute!important;left:50%!important;bottom:8%!important;top:auto!important;transform:translateX(-50%)!important;z-index:10002!important;pointer-events:auto!important;border:2px solid #fff;border-radius:999px;background:rgba(42,36,27,.88);color:#fff;padding:1.05rem 2.45rem;font:700 1rem Arial,sans-serif;letter-spacing:.18em;white-space:nowrap;cursor:pointer;box-shadow:0 3px 18px #0005}
+#openingVideoSlide #tapOpen:active{background:rgba(90,75,52,.95)}
+
+
+.map-page{height:fit-content!important;min-height:0!important;max-height:none!important;box-sizing:border-box!important;justify-content:flex-start!important;padding:1rem 1rem .75rem!important;gap:.5rem!important;overflow:hidden!important;flex:none!important}
+.map-page h2{flex:0 0 auto;margin:0!important;padding:0!important;line-height:1.15}
+.map-frame{width:min(100%,900px);height:clamp(200px,32svh,340px)!important;min-height:200px!important;max-height:340px!important;flex:0 0 auto;margin:0!important}
+.map-link{margin:0!important;padding:0 0 .1rem!important;flex:0 0 auto;line-height:1.2}
+.map-page 
+.map-page 
+/* Keep the map section content-height instead of a full-screen slide. */
+section.map-page{height:fit-content!important;min-height:0!important;max-height:none!important;margin:0!important}
+
+</style>
+</head>
+<body class="waiting-to-open">
+<audio id="backgroundSong" src="song.mp3" preload="auto" loop></audio>
+
+
+<section class="image-slide petal-slide first-combined-slide" data-palette="gold" id="firstCombinedSlide" aria-label="Opening video over wedding invitation">
+  <img src="opening-invitation.jpg" alt="Wedding invitation for Chetan and Ishyankita">
+  <div class="opening-video-overlay" id="openingVideoSlide">
+    <video id="openingVideo" src="opening-video.mp4" muted playsinline preload="metadata"></video>
+    <button class="tap-open" id="tapOpen" type="button">Tap to Open</button>
+    <div class="video-start-note" id="videoStartNote" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="invitation-page petal-slide" data-palette="teal" aria-label="Invitation and interactive scratch card">
+  <div class="invitation-art" id="invitationArt">
+    <img id="invitationImage" src="invitation-scratch-slide.png" alt="Ornate invitation reading Some dates are meant to be discovered and To reveal our Special Dates">
+    <div class="coded-ticket" id="codedTicket">
+      <span class="ticket-flower left">✿</span>
+      <span class="ticket-flower right">✿</span>
+      <div class="date-underlay">5th December</div>
+      <canvas id="scratchCanvas" aria-label="Scratch the ticket to reveal 5th December"></canvas>
+    </div>
+  </div>
+</section>
+
+<section class="video-slide petal-slide" data-palette="pink" aria-label="Video slide 2"><video src="slide-2.mp4" autoplay muted loop playsinline preload="metadata"></video>
+</section>
+<section class="video-slide petal-slide" data-palette="gold" aria-label="Video slide 3"><video src="slide-3.mp4" autoplay muted loop playsinline preload="metadata"></video>
+</section>
+<section class="video-slide petal-slide" data-palette="cream" aria-label="Video slide 4"><video src="slide-4.mp4" autoplay muted loop playsinline preload="metadata"></video>
+</section>
+<section class="video-slide petal-slide" data-palette="gold" aria-label="Video slide 7"><video src="slide-7.mp4" autoplay muted loop playsinline preload="metadata"></video>
+</section>
+<section class="video-slide petal-slide" data-palette="teal" aria-label="Video slide 5"><video src="slide-5.mp4" autoplay muted loop playsinline preload="metadata"></video>
+</section>
+<section class="video-slide petal-slide" data-palette="pink" aria-label="Video slide 6"><video src="slide-6.mp4" autoplay muted loop playsinline preload="metadata"></video>
+</section>
+
+<section class="map-page petal-slide" data-palette="cream" aria-label="Location map">
+  <h2>Narwar Lakefront Resort</h2>
+  <div class="map-frame"><iframe title="Narwar Lakefront Resort map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Narwar%20Lakefront%20Resort&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe></div>
+  <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Narwar+Lakefront+Resort" target="_blank" rel="noopener">Open in Google Maps</a>
+</section>
+
+<script>
+(() => {
+  // Decorative petals are drawn in a palette that complements each slide.
+  const palettes = {
+    cream: ['#f6e8c6','#d8b879','#fff7e7'],
+    gold: ['#d6a54f','#f0cf87','#e7b8a8'],
+    teal: ['#d9b5b0','#d5bd83','#e8d7b5'],
+    pink: ['#e9a4ad','#f4c9cf','#d7b978']
+  };
+  document.querySelectorAll('.petal-slide').forEach((section, idx) => {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'petal-layer';
+    section.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    let w=0,h=0,petals=[];
+    const palette=palettes[section.dataset.palette]||palettes.cream;
+    function resize(){
+      const r=section.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
+      w=r.width;h=r.height;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      petals=Array.from({length:Math.max(12,Math.min(30,Math.round(w/28)))},()=>({
+        x:Math.random()*w,y:Math.random()*h, size:3+Math.random()*5,
+        speed:.45+Math.random()*1.1, drift:(Math.random()-.5)*.7,
+        rot:Math.random()*Math.PI*2, spin:(Math.random()-.5)*.035,
+        color:palette[Math.floor(Math.random()*palette.length)],
+        shape:Math.random()
+      }));
+    }
+    resize();window.addEventListener('resize',resize);
+    function frame(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of petals){
+        p.y+=p.speed;p.x+=Math.sin(p.y*.012+idx)*.55+p.drift;p.rot+=p.spin;
+        if(p.y>h+12){p.y=-12;p.x=Math.random()*w;}
+        if(p.x<-12)p.x=w+12;if(p.x>w+12)p.x=-12;
+        ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.color;ctx.globalAlpha=.82;
+        ctx.beginPath();ctx.ellipse(0,0,p.size*.58,p.size,0,0,Math.PI*2);ctx.fill();ctx.restore();
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  });
+  const ticket=document.getElementById('codedTicket');
+  const canvas=document.getElementById('scratchCanvas');
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});
+  let drawing=false,last=null,cleared=false;
+  function setup(){
+    if(cleared)return;
+    const r=ticket.getBoundingClientRect(),dpr=Math.max(1,window.devicePixelRatio||1);
+    canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const g=ctx.createLinearGradient(0,0,r.width,r.height);
+    g.addColorStop(0,'#ead8a6');g.addColorStop(.48,'#c9ac6c');g.addColorStop(1,'#e8d4a0');
+    ctx.globalCompositeOperation='source-over';ctx.fillStyle=g;ctx.fillRect(0,0,r.width,r.height);
+    ctx.fillStyle='rgba(255,250,230,.26)';
+    for(let x=0;x<r.width;x+=10)for(let y=0;y<r.height;y+=9)ctx.fillRect(x+Math.random()*2,y+Math.random()*2,1,1);
+    ctx.fillStyle='#173f43';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font='600 '+Math.max(11,Math.min(18,r.height*.19))+'px Georgia';
+    ctx.fillText('SCRATCH TO REVEAL',r.width/2,r.height/2);
+    ctx.globalCompositeOperation='destination-out';
+  }
+  function point(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+  function scratch(e){
+    const p=point(e);
+    ctx.beginPath();
+    if(last){ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.lineWidth=28;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();}
+    ctx.arc(p.x,p.y,14,0,Math.PI*2);ctx.fill();last=p;
+    const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;let clear=0,total=0;
+    for(let i=3;i<pixels.length;i+=4*12){total++;if(pixels[i]<30)clear++;}
+    if(clear/total>.42&&!cleared){cleared=true;canvas.style.transition='opacity .4s';canvas.style.opacity='0';setTimeout(()=>canvas.style.display='none',450);}
+  }
+  canvas.addEventListener('pointerdown',e=>{drawing=true;last=null;canvas.setPointerCapture(e.pointerId);scratch(e);});
+  canvas.addEventListener('pointermove',e=>{if(drawing)scratch(e);});
+  const stop=()=>{drawing=false;last=null;};
+  canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
+  setup();window.addEventListener('resize',setup);
+  const tapOpen=document.getElementById('tapOpen');
+  const openingVideo=document.getElementById('openingVideo');
+  const openingOverlay=document.getElementById('openingVideoSlide');
+  const startNote=document.getElementById('videoStartNote');
+  document.body.classList.add('waiting-to-open');
+  const backgroundSong=document.getElementById('backgroundSong');
+  tapOpen.addEventListener('click',()=>{
+    openingVideo.currentTime=0;
+    backgroundSong.volume=0.8;
+    backgroundSong.play().catch(()=>{});
+    openingVideo.play().then(()=>{
+      tapOpen.style.display='none';
+      startNote.style.display='none';
+    }).catch(()=>{
+      tapOpen.style.display='block';
+      tapOpen.style.visibility='visible';
+      startNote.textContent='Tap to Open';
+      startNote.style.display='block';
+    });
+  });
+  openingVideo.addEventListener('playing',()=>{tapOpen.style.display='none';startNote.style.display='none';});
+  openingVideo.addEventListener('ended',()=>{
+    openingOverlay.classList.add('video-finished');
+    document.body.classList.remove('waiting-to-open');
+    setTimeout(()=>{openingOverlay.style.display='none';},700);
+  });
+  // Other slides play only while visible; the opening video is intentionally played once.
+  const videos=[...document.querySelectorAll('video:not(#openingVideo)')];
+  if('IntersectionObserver'in window){
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting)entry.target.play().catch(()=>{});else entry.target.pause();
+    }),{threshold:.35});
+    videos.forEach(v=>observer.observe(v));
+  }
+})();
+</script>
+</body>
+</html>
