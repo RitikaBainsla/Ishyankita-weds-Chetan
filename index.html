@@ -122,6 +122,16 @@ body.waiting-to-open .first-combined-slide{height:100svh;min-height:100svh;max-h
 /* Keep the map section content-height instead of a full-screen slide. */
 section.map-page{height:fit-content!important;min-height:0!important;max-height:none!important;margin:0!important}
 
+
+.scroll-invite-cue{position:absolute;left:1rem;right:1rem;bottom:19%;z-index:10001;text-align:center;color:#fff4dc;text-shadow:0 2px 8px #000;font-family:Georgia,'Times New Roman',serif;font-size:clamp(.95rem,2.5vw,1.25rem);line-height:1.5;padding:.7rem 1rem;border-radius:12px;background:rgba(6,31,37,.62);pointer-events:none}
+.scroll-invite-cue strong{display:block;font-weight:400;font-style:italic;font-size:1.08em}
+.scroll-invite-cue .scroll-arrow{display:block;font-size:1.5rem;line-height:1.1;color:#f0cf87;margin-top:.1rem}
+#firstCombinedSlide>.scroll-invite-cue{z-index:10;bottom:3%;color:#123f43;text-shadow:none;background:rgba(248,238,217,.92);left:5%;right:5%;padding:.45rem .7rem;font-size:clamp(.78rem,2vw,1rem)}
+.rsvp-page{min-height:42vh;height:auto!important;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:3rem 1.25rem;text-align:center;background:radial-gradient(ellipse at center,#1c5557,#082d33 75%);color:#f8eed9}
+.rsvp-page h2{font-size:clamp(2rem,6vw,3.5rem);font-weight:400;font-style:italic;margin:0}
+.rsvp-page p{margin:0;font-size:1.1rem}
+.rsvp-button{display:inline-block;border:1px solid #d6b56f;border-radius:999px;padding:.9rem 1.8rem;background:#f5ecd8;color:#123f43;text-decoration:none;font-size:1rem;letter-spacing:.06em}
+
 </style>
 </head>
 <body class="waiting-to-open">
@@ -130,6 +140,10 @@ section.map-page{height:fit-content!important;min-height:0!important;max-height:
 
 <section class="image-slide petal-slide first-combined-slide" data-palette="gold" id="firstCombinedSlide" aria-label="Opening video over wedding invitation">
   <img src="opening-invitation.jpg" alt="Wedding invitation for Chetan and Ishyankita">
+  <div class="scroll-invite-cue">
+    <strong>The celebrations don’t fit on one page! ✨</strong>
+    Scroll down for all the love, laughter &amp; wedding madness! ↓
+  </div>
   <div class="opening-video-overlay" id="openingVideoSlide">
     <video id="openingVideo" src="opening-video.mp4" muted playsinline preload="metadata"></video>
     <button class="tap-open" id="tapOpen" type="button">Tap to Open</button>
@@ -166,6 +180,12 @@ section.map-page{height:fit-content!important;min-height:0!important;max-height:
   <h2>Narwar Lakefront Resort</h2>
   <div class="map-frame"><iframe title="Narwar Lakefront Resort map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Narwar%20Lakefront%20Resort&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe></div>
   <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Narwar+Lakefront+Resort" target="_blank" rel="noopener">Open in Google Maps</a>
+</section>
+
+<section class="rsvp-page petal-slide" data-palette="gold" aria-label="Wedding RSVP">
+  <h2>We can’t wait to celebrate with you!</h2>
+  <p>Kindly RSVP using the link below.</p>
+  <a class="rsvp-button" href="https://chetan-ishya-wedding-rsvp.ishya-work-6202.chatgpt.site" target="_blank" rel="noopener">RSVP Here ✨</a>
 </section>
 
 <script>
